@@ -83,7 +83,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>com.urantech.restapi.RestApiApplication</mainClass>
+                    <mainClass>com.urantech.userservice.UserServiceApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
