@@ -16,9 +16,9 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserResponse> getUsersWithTasks() {
+    public List<UserResponse> getUsersWithUnfinishedTasks() {
         try {
-            return userRepository.findAllEnabledUsersWithTasksCount();
+            return userRepository.findAllEnabledUsersWithUnfinishedTasksCount();
         } catch (Exception e) {
             throw new IllegalStateException("Непредвиденная ошибка: " + e.getMessage());
         }

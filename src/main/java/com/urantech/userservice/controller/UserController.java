@@ -21,6 +21,6 @@ public class UserController {
 
     @GetMapping
     public List<UserResponse> getAllUsersWithTasks() {
-        return userService.getUsersWithTasks();
+        return userService.getUsersWithUnfinishedTasks();
     }
 }

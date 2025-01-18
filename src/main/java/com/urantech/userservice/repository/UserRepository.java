@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select new com.urantech.userservice.model.rest.UserResponse(u.email, count(t)) " +
             "from User u left join u.tasks t " +
-            "where u.enabled = true " +
+            "where u.enabled = true and t.done = false " +
             "group by u.email")
-    List<UserResponse> findAllEnabledUsersWithTasksCount();
+    List<UserResponse> findAllEnabledUsersWithUnfinishedTasksCount();
 }

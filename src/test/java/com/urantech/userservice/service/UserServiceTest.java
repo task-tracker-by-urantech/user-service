@@ -35,7 +35,7 @@ class UserServiceTest {
                 "values (12345, 12345, 'task', false)");
 
         // when
-        List<UserResponse> actual = service.getUsersWithTasks();
+        List<UserResponse> actual = service.getUsersWithUnfinishedTasks();
 
         // then
         assertThat(actual.size(), equalTo(1));
@@ -43,14 +43,27 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldReturnEmptyListWhenUsersAreDisabled() {
+    void givenDisableUser_whenGetUsersWithUnfinishedTasks_thenReturnEmptyList() {
         // given
         jdbcTemplate.execute("insert into task (id, user_id, description, done) " +
                 "values (12345, 12345, 'task', false)");
         jdbcTemplate.execute("update users set task_id = 12345, enabled = false where id = 12345");
 
         // when
-        List<UserResponse> actual = service.getUsersWithTasks();
+        List<UserResponse> actual = service.getUsersWithUnfinishedTasks();
+
+        // then
+        assertThat(actual.size(), equalTo(0));
+    }
+
+    @Test
+    void givenDoneTask_whenGetAllUsersWithUnfinishedTasks_thenGetReturnEmptyList() {
+        // given
+        jdbcTemplate.execute("insert into task (id, user_id, description, done) " +
+                "values (12345, 12345, 'task', true)");
+
+        // when
+        List<UserResponse> actual = service.getUsersWithUnfinishedTasks();
 
         // then
         assertThat(actual.size(), equalTo(0));
